@@ -9,39 +9,20 @@
 #define TADFILES_H_
 
 #include <stdio.h>
+#include <commons/txt.h>
+#include <commons/collections/list.h>
+#include <commons/string.h>
 
- generic read(FILE* f)
-{
-   void * x;
+// Funcion leer caracter de archivo
+char readChar(FILE*);
 
-   fread(&x,sizeof(T),1,f);
+// Funcion leer linea
+t_list* leerLinea (char, int, FILE*);
 
-   return x;
-}
+// Funcion procesar UNA linea
+char* procesarLinea (t_list*, char* (*criterio)(t_list*));
 
-template <typename T> void write(FILE* f, T v)
-{
-   fwrite(&v,sizeof(T),1,f);
-}
-
-template <typename T> void seek(FILE* f, int n)
-{
-   fseek(f,sizeof(T)*n,SEEK_SET);
-}
-
-template <typename T> long fileSize(FILE* f)
-{
-   int PosAct = ftell(f);
-   fseek(f,0,SEEK_END);
-   int cantReg=ftell(f)/sizeof(T);
-   fseek(f,PosAct,SEEK_SET);
-   return cantReg;
-}
-
-template <typename T> long filePos(FILE* f)
-{
-   return ftell(f)/sizeof(T);
-}
-
+// Funcion procesar MULTIPLES lineas
+void procesarMultiplesLineas(t_list*, char* (*criterio)(t_list*), FILE*);
 
 #endif /* TADFILES_H_ */

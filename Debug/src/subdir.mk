@@ -5,15 +5,18 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../src/Biblioteca.c \
-../src/EjerciciosDeC.c 
+../src/EjerciciosDeC.c \
+../src/TADfiles.c 
 
 OBJS += \
 ./src/Biblioteca.o \
-./src/EjerciciosDeC.o 
+./src/EjerciciosDeC.o \
+./src/TADfiles.o 
 
 C_DEPS += \
 ./src/Biblioteca.d \
-./src/EjerciciosDeC.d 
+./src/EjerciciosDeC.d \
+./src/TADfiles.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

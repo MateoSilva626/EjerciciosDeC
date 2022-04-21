@@ -9,6 +9,7 @@
 #define TADFILES_H_
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <commons/txt.h>
 #include <commons/collections/list.h>
 #include <commons/string.h>
@@ -18,9 +19,6 @@ char readChar(FILE*);
 
 // Funcion leer linea
 t_list* leerLinea (char, int, FILE*);
-
-// Funcion procesar UNA linea
-char* procesarLinea (t_list*, char* (*criterio)(t_list*));
 
 // Funcion procesar MULTIPLES lineas
 void procesarMultiplesLineas(t_list*, char* (*criterio)(t_list*), FILE*);

@@ -42,13 +42,17 @@ t_list* leerLinea(char caracterSeparador, int cantCamposPorLinea, FILE* archivo)
 
 	char ch = readChar(archivo);
 
+	char* chCasteado = malloc(sizeof(char));
+
+	*chCasteado = ch; // Transformamos el char a un string (char casteado)
+
 	char* campoLinea = string_new();
 
 	while(sizeof(linea) != cantCamposPorLinea)
 	   {
 			 // Busco elemento a elemento
 			 if(ch != caracterSeparador){
-				 string_append(&campoLinea, ch);
+				 string_append(&campoLinea, chCasteado); // No se puede concatenar char con char*
 			 }
 			 else{
 				  list_add(linea,campoLinea);
@@ -58,16 +62,11 @@ t_list* leerLinea(char caracterSeparador, int cantCamposPorLinea, FILE* archivo)
 			 ch = readChar(archivo);
 	   }
 
+	free(chCasteado);
+
 	return linea;
 
 }
-
-
-char* procesarLinea (t_list* linea, char* (*criterio)(t_list*)) {
-
-	return criterio(linea);
-}
-
 
 void procesarMultiplesLineas(t_list* multiplesLineas, char* (*criterio)(t_list*), FILE* archivo) {
 
@@ -77,7 +76,7 @@ void procesarMultiplesLineas(t_list* multiplesLineas, char* (*criterio)(t_list*)
 
 	while (list_iterator_has_next(iteradorFuncion)) {
 
-		char* loQueDevuelve = procesarlinea(lineaEncontrada,criterio()); // a "criterio" le faltan parametros, ver .c de las commons
+		char* loQueDevuelve = criterio(lineaEncontrada); // a "criterio" le faltan parametros, ver .c de las commons
 		txt_write_in_file(archivo, loQueDevuelve);
 	}
 

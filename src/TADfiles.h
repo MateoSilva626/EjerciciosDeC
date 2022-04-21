@@ -1,10 +1,3 @@
-/*
- * TADfiles.h
- *
- *  Created on: 19 abr. 2022
- *      Author: utnso
- */
-
 #ifndef TADFILES_H_
 #define TADFILES_H_
 

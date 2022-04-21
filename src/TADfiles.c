@@ -1,40 +1,7 @@
-/*
- * TADfiles.c
- *
- *  Created on: 19 abr. 2022
- *      Author: utnso
- */
-
-
 // Linea -> Lista de campos
 // Lineas -> Lista de lineas
 
 #include "TADfiles.h"
-
-
-void procesarArchivo(char caracterSeparador, int cantCamposPorLinea, char* (*criterio)(t_list*)) {
-
-	t_list* multiplesLineas = list_create();
-
-
-	FILE* archivo = fopen("archivo.dat","r+b");
-
-	while( !feof(archivo) )
-	   {
-
-		t_list* linea = list_create();
-
-		linea = leerLinea(caracterSeparador,cantCamposPorLinea,archivo);
-
-		list_add(multiplesLineas,linea); // int list_add(t_list *, void *element);
-
-	   }
-
-	 fclose(archivo);
-
-	procesarMultiplesLineas(multiplesLineas,criterio,archivo);
-}
-
 
 t_list* leerLinea(char caracterSeparador, int cantCamposPorLinea, FILE* archivo){
 
@@ -48,10 +15,10 @@ t_list* leerLinea(char caracterSeparador, int cantCamposPorLinea, FILE* archivo)
 
 	char* campoLinea = string_new();
 
-	while(sizeof(linea) != cantCamposPorLinea)
+	while(list_size(linea) != cantCamposPorLinea)
 	   {
 			 // Busco elemento a elemento
-			 if(ch != caracterSeparador){
+			 if(ch != caracterSeparador || ch != '\n'){
 				 string_append(&campoLinea, chCasteado); // No se puede concatenar char con char*
 			 }
 			 else{
@@ -60,6 +27,7 @@ t_list* leerLinea(char caracterSeparador, int cantCamposPorLinea, FILE* archivo)
 			 }
 
 			 ch = readChar(archivo);
+			 *chCasteado = ch;
 	   }
 
 	free(chCasteado);
